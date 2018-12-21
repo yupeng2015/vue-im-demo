@@ -1,0 +1,26 @@
+body{font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
+body,html{  height:100%;overflow: hidden}
+.main{border: 1px solid #f3f3f3;max-width: 640px;height: 96% ;border-radius: 3px;padding: 6px;margin:8px 0 0 0;margin:auto}
+.message_header{width: 98%;margin: 0 auto;border: 1px solid #ccc !important;}
+/*.message_header_row{background:#17233d;height:30px;line-height:30px;margin-bottom: 4px;border-radius: 2px;*/
+    /*color: #f3f3f3;}*/
+.user_section{
+min-height: 300px;
+    margin-top: 1px;
+    background: #f8f8f9;
+}
+
+.avatar_radius{width: 74px; height: 74px; float:left; border-radius: 50%; border: 3px solid #eee; overflow: hidden;}
+.avatar_radius img{
+    width:80px;
+    height: 80px;
+}
+
+.message_content{width: 98%;margin:0 auto;overflow-y: scroll;border: 1px solid #ccc !important;}
+.message_record{margin-bottom: 30px;}
+.message_record_col p{display: flex;align-items:Center;
+    color: #f3f3f3f3;min-height:30px;padding:6px 2px 6px 6px;}
+.message_record_col_left {background: #2b85e4;border-radius: 3px;}
+.message_record_col_right {background: #19be6b;float: right !important;border-radius: 3px}
+.message_foot{width: 98%;min-height:80px;margin: auto;border: 1px solid #ccc !important;}
+.send_content textarea{width:100%;border: 0;resize: none;outline: none}
