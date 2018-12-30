@@ -5,6 +5,7 @@ import Register from './components/Register.vue'
 import Login from './components/Login.vue'
 
 const router = new VueRouter({
+    mode: 'history',
     routes: [
         // 动态路径参数 以冒号开头
         { path: '/', component: Main,name:'index'},
@@ -16,9 +17,29 @@ const router = new VueRouter({
 
 router.beforeResolve((to, from,next)=>{
     if(to.path !== '/login' && !localStorage.getItem('access_token')){
-        router.push({'path':'login'})
+        router.push({'path':'/login'});
+        return;
     }
-    next()
+    // let res;
+    // if(to.path !== '/login'){
+    //     res = (async function () {
+    //         let response = await Vue.axios.get('/api/public/check-token');
+    //         return new Promise((resolve) => {
+    //             resolve(response)
+    //         })
+    //     })()
+
+    +
+
+        +
+    // }
+    // console.log(res);
+    // if(res.status == 401){
+    //     router.push({'path':'/login'});
+    //     return;
+    // }
+    next();
+
 })
 
 export default () => {

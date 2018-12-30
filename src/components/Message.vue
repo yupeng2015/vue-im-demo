@@ -3,7 +3,7 @@
         <Row style="padding:10px 0 6px 0">
             <Col span="24">
                 <Card class="message_header">
-                正在和{{user_info.user.account}}聊天
+                正在和<b style="color:#2db7f5">{{user_info.user.account}}</b>聊天
             </Card>
             </Col>
         </Row>
@@ -83,7 +83,7 @@
                 }
                 //请求服务端
                 this.message_struct.params = data;
-                this.message_struct.event = "messageAdd";
+                this.message_struct.event = "messageEmit";
                 this.ws_object.send(JSON.stringify(this.message_struct));
                 this.message_list.push(data);
                 //保证每次都在最低端显示最新消息
@@ -110,13 +110,19 @@
                     .then(function (response) {
                         //console.log(response);
                         _this.message_list = response.data.data;
+                        _this.$nextTick(function () {
+                            //控制聊天容器出现滚动条
+                            document.querySelector('.message_content').style.height=_this.message_content_height;
+                            document.querySelector('.message_content').scrollTop=document.querySelector('.message_content').scrollHeight;
+                        })
+
                     })
             },
             //websocket聊天初始化
             wsObjectInit:function () {
                 let _this = this;
                 //webSocket链接
-                this.ws_object = new WebSocket('ws://192.168.1.14:9502?access_token='+localStorage.getItem('access_token'))
+                this.ws_object = _this.$store.state.ws_object;
                 this.ws_object.onopen = function(evt) {
                     console.log('已连接');
                 };
@@ -125,17 +131,14 @@
                 };
                 this.ws_object.onmessage = function (evt) {
                     let evtDataJson = JSON.parse(evt.data);
-                    if(evtDataJson.params.send_user_id == _this.user_info.user.id){
+                    console.log(evtDataJson);
+                    if(evtDataJson.send_user_id == _this.user_info.user.id){
                         _this.scroll_height = document.querySelector('.message_content').scrollHeight-document.querySelector('.message_content').scrollTop;
-                        console.log(_this.scroll_height);
-                        _this.message_list.push(evtDataJson.params);
+                        _this.message_list.push(evtDataJson);
                         //如果滚动条本身就在最底部 保证每次都在最低端显示最新消息
-
-//                            _this.$nextTick(function () {
-//                                document.querySelector('.message_content').scrollTop = document.querySelector('.message_content').scrollHeight
-//                            })
-
-
+                            _this.$nextTick(function () {
+                                document.querySelector('.message_content').scrollTop = document.querySelector('.message_content').scrollHeight
+                            })
                     }
                     console.log(evtDataJson);
                 }
@@ -148,18 +151,11 @@
             }
         },
         mounted:function () {
+            let _this = this;
             //对方信息 聊天历史信息
             this.getUserInfo(this.$route.params.user_id);
             this.wsObjectInit();
-
-            this.$nextTick(function () {
-                //控制聊天容器出现滚动条
-                this.message_content_height = screen.height*0.5+"px";
-                document.querySelector('.message_content').style.height=this.message_content_height;
-                this.scroll_height = document.querySelector('.message_content').scrollHeight-document.querySelector('.message_content').scrollTop;
-                console.log(this.scroll_height);
-            })
-
+            this.message_content_height = screen.height*0.5+"px";
         }
     }
 </script>

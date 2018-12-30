@@ -23,6 +23,7 @@
 </template>
 <script>
     import qs from 'qs';
+
     export default {
         data(){
             return{
@@ -52,8 +53,10 @@
                                 _this.$Message.success(response.data.msg);
                                 //全局 storage
                                 localStorage.setItem("access_token",response.data.access_token);
-                                _this.axios.defaults.headers['access-token'] = response.data.access_token
-                                _this.$router.push({path:'/'})
+                                _this.axios.defaults.headers['access-token'] = response.data.access_token;
+                                _this.$store.state.ws_object = new WebSocket('ws://192.168.1.14:9502?access_token='+response.data.access_token);
+                                _this.$store.commit('login');
+                                _this.$router.push({path:'/'});
                             })
                             .catch(function (error) {
                                 _this.$Message.error(error.response.data.msg);
@@ -64,6 +67,9 @@
                     }
                 })
             }
+        },
+        mounted:function () {
+         console.log(this.$store.state.login_status);
         }
     }
 </script>

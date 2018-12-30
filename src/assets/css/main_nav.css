@@ -10,6 +10,15 @@ min-height: 300px;
     background: #f8f8f9;
 }
 
+.main_tab_main{height:400px;overflow-y:auto;overflow-x:hidden;}
+
+.row_head_mid{background:#dcdee2;height: auto;}
+.mid_user_row{height: auto;background:#e8eaec}
+.mid_user_col{
+    height:50px;
+    line-height: 50px;
+}
+
 .avatar_radius{width: 74px; height: 74px; float:left; border-radius: 50%; border: 3px solid #eee; overflow: hidden;}
 .avatar_radius img{
     width:80px;
