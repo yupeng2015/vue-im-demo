@@ -3,12 +3,14 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://vm.mixphp.com:9501',
+                target: 'http://vm.test.com:9501',
                 changeOrigin: true,
                 pathRewrite:{
                     '^/api':''
                 }
             }
         }
-    }
+    },
+    publicPath:"./",
+    //assetsDir:"./"
 }

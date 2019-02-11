@@ -5,7 +5,8 @@ import Register from './components/Register.vue'
 import Login from './components/Login.vue'
 
 const router = new VueRouter({
-    mode: 'history',
+    //mode: 'history',
+    mode: 'hash',
     routes: [
         // 动态路径参数 以冒号开头
         { path: '/', component: Main,name:'index'},

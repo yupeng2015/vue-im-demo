@@ -1,10 +1,13 @@
 <template>
     <div style="height: 100%;">
         <Row style="padding:10px 0 6px 0">
-            <Col span="24">
+            <i-col span="2">
+                <a @click="$router.back(-1)">返回</a>
+            </i-col>
+            <Col span="22">
                 <Card class="message_header">
                 正在和<b style="color:#2db7f5">{{user_info.user.account}}</b>聊天
-            </Card>
+                </Card>
             </Col>
         </Row>
 
@@ -95,7 +98,7 @@
             //获取聊天用户的信息
             getUserInfo:async function (user_id) {
                 let _this = this;
-                const response = await this.axios.get('/api/user/get-message-user-info',{
+                const response = await this.axios.get('/user/get-message-user-info',{
                     params:{user_id:user_id}
                 })
                 _this.user_info = response.data.data;
@@ -104,7 +107,7 @@
             //获取聊天记录
             getSingleChatRecord:function () {
                 let _this = this;
-                this.axios.get('/api/user/get-single-chat-record',{
+                this.axios.get('/user/get-single-chat-record',{
                     params:{send_user_id:_this.user_info.me.id,receive_user_id:_this.user_info.user.id}
                 })
                     .then(function (response) {

@@ -2,27 +2,31 @@
   "name": "hello-world",
   "version": "0.1.0",
   "private": true,
+  "main": "./src/elec.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "iview": "^3.1.5",
-    "vue": "^2.5.17",
+    "iview": "^3.2.1",
+    "path": "^0.12.7",
+    "vue": "^2.5.21",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^3.3.0",
+    "@vue/cli-service": "^3.3.0",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
+    "electron": "^3.1.0",
+    "electron-package": "^0.1.0",
+    "eslint": "^5.12.0",
+    "eslint-plugin-vue": "^5.1.0",
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.2",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
     "root": true,

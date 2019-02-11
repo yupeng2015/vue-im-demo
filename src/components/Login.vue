@@ -48,7 +48,7 @@
                 _this.$refs[name].validate((valid) => {
                     if (valid) {
                         let postData = qs.stringify(_this.formInline);
-                        _this.axios.post('api/public/post-login', postData)
+                        _this.axios.post('/api/public/post-login', postData)
                             .then(function (response) {
                                 _this.$Message.success(response.data.msg);
                                 //全局 storage
@@ -59,6 +59,7 @@
                                 _this.$router.push({path:'/'});
                             })
                             .catch(function (error) {
+                                console.log(error.response);
                                 _this.$Message.error(error.response.data.msg);
                             });
 

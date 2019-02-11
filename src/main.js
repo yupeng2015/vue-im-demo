@@ -10,10 +10,10 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 import AxiosGlobal from './components/common/AxiosGlobal.vue'
 //Vue.axios.defaults.baseURL = AxiosGlobal.baseURL;
-Vue.axios.defaults.headers=AxiosGlobal.headers;
+//Vue.axios.defaults.headers=AxiosGlobal.headers;
 
 //初始化关闭
-window.isCloseHint = true;
+window.isCloseHint = false;
 window.addEventListener("beforeunload", function(e) {
     if (window.isCloseHint) {
         Vm.$store.state.ws_object.close();
@@ -39,7 +39,10 @@ let Vm = new Vue({
     created:function () {
         let _this = this;
         console.log('初始化Vue');
-        _this.$store.state.ws_object = new WebSocket('ws://192.168.1.14:9502?access_token='+localStorage.getItem('access_token'));
+        if(localStorage.getItem('access_token')){
+            _this.$store.state.ws_object = new WebSocket('ws://192.168.1.14:9502?access_token='+localStorage.getItem('access_token'));
+        }
+
         //设置 http response 拦截器
         _this.axios.interceptors.response.use(
             response => {
@@ -60,5 +63,20 @@ let Vm = new Vue({
                 }
                 return Promise.reject(error.response.data)   // 返回接口返回的错误信息
             });
+
+        _this.axios.interceptors.request.use(
+            config => {
+                let params = {'access-token':localStorage.getItem('access_token')};
+                //Object.assign(config.headers,AxiosGlobal.headers)
+                if(config.hasOwnProperty('params')){
+                    params = Object.assign(params,config.params);
+                }
+                config.params = params;
+                return config;
+            },
+            err => {
+                return Promise.reject(err);
+            });
+
     }
 }).$mount('#app')

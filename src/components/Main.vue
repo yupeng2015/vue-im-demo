@@ -45,6 +45,7 @@
 </template>
 <script>
     import '../assets/css/main_nav.css'
+    import qs from 'qs';
     export default {
         data(){
             return{
@@ -70,7 +71,8 @@
         mounted:function () {
             let _this = this;
             _this.getMeInfo();
-            _this.axios.get('/api/public/get-user-list')
+            let postData = qs.stringify({'id':5555});
+            _this.axios.post('/api/public/get-user-list',postData)
                 .then(function (response) {
                     _this.user_list = response.data.data
                 })

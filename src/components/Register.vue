@@ -48,9 +48,11 @@
                     if (valid) {
                         this.$Message.success('Success!');
                         let postData = qs.stringify(_this.formInline);
-                        _this.axios.post('/api/public/post-register', postData)
+                        _this.axios.post('/public/post-register', postData)
                         .then(function (response) {
-                            console.log(response);
+                            if(response.data.code == 1){
+                                _this.$router.push({path:'/login'});
+                            }
                         })
                         .catch(function (error) {
                             console.log(error);
